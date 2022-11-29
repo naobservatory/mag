@@ -42,8 +42,16 @@ def main(args=None):
     bin_labels=True
     if (len(df) > 30):
         bin_labels=False
-    sns.clustermap(df, row_cluster=True, yticklabels=bin_labels, cmap="vlag", center=0, col_colors=groups.group.map(color_map), figsize=(6,6))
-    plt.savefig(args.out)
+    try:
+        sns.clustermap(df, row_cluster=True, yticklabels=bin_labels, cmap="vlag", center=0, col_colors=groups.group.map(color_map), figsize=(6,6))
+        plt.savefig(args.out)
+    except ValueError as e:
+        n_mags = df.shape[0]
+        if n_mags <= 1:
+            e = str(e) + f'\n\nNot enough rows in the MAGs to plot the MAG depths, number of MAGs = {n_mags}'
+        # Save error to file
+        with open(args.out, 'a') as f:
+            f.write(f'{e}')
 
 
 if __name__ == "__main__":
