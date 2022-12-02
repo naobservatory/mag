@@ -202,11 +202,29 @@
                     "fa_icon": "fas fa-palette",
                     "hidden": true
                 },
+                "hook_url": {
+                    "type": "string",
+                    "description": "Incoming hook URL for messaging service",
+                    "fa_icon": "fas fa-people-group",
+                    "help_text": "Incoming hook URL for messaging service. Currently, only MS Teams is supported.",
+                    "hidden": true
+                },
                 "multiqc_config": {
                     "type": "string",
                     "description": "Custom config file to supply to MultiQC.",
                     "fa_icon": "fas fa-cog",
                     "hidden": true
+                },
+                "multiqc_logo": {
+                    "type": "string",
+                    "description": "Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file",
+                    "fa_icon": "fas fa-image",
+                    "hidden": true
+                },
+                "multiqc_methods_description": {
+                    "type": "string",
+                    "description": "Custom MultiQC yaml file containing HTML including a methods description.",
+                    "fa_icon": "fas fa-cog"
                 },
                 "tracedir": {
                     "type": "string",
@@ -632,6 +650,11 @@
                     "description": "Specify which binning output is sent for downstream annotation, taxonomic classification, bin quality control etc.",
                     "help_text": "`raw_bins_only`: only bins (and unbinned contigs) from the binners.\n`refined_bins_only`:  only bins (and unbinned contigs) from the bin refinement step .\n`both`: bins and unbinned contigs from both the binning and bin refinement steps.",
                     "enum": ["raw_bins_only", "refined_bins_only", "both"]
+                },
+                "busco_clean": {
+                    "type": "boolean",
+                    "description": "Enable clean-up of temporary files created during BUSCO runs.",
+                    "help_text": "By default, BUSCO creates a large number of intermediate files every run. This may cause problems on some clusters which have file number limits in plate, particularly with large numbers of bins. Enabling this option cleans these files, reducing the total file count of the work directory."
                 }
             }
         },
