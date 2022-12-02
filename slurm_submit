@@ -1,0 +1,35 @@
+#!/bin/bash 
+#SBATCH -N 1 # Request 1 node
+##SBATCH --exclusive
+#SBATCH -n 4 #Request 4 tasks (cores)
+#SBATCH -t 0-12:00 #Request max runtime of 12 hrs
+#SBATCH -p sched_mit_hill #Run on specified partition
+#SBATCH --mem-per-cpu=4000 #Request 4GB of memory per CPU
+#SBATCH -o /pool001/phil_p/slurm/output_%j.txt #redirect output to output_JOBID.txt
+#SBATCH -e /pool001/phil_p/slurm/error_%j.txt #redirect errors to error_JOBID.txt
+
+# Load modules
+module load anaconda3/2021.11
+module load singularity/3.7.0
+
+# Define vars
+SINGULARITY_CACHEDIR=~/.singularity
+SINGULARITY_TMPDIR=/tmp
+NXF_SINGULARITY_CACHEDIR=/home/phil_p/.singularity
+
+# Activate conda env
+# conda create --name nf-core -c conda-forge -c bioconda python=3.7 nf-core nextflow
+source /home/software/anaconda3/2021.11/etc/profile.d/conda.sh
+conda activate nf-core
+
+# Download Singularity images - run this interactively
+# nf-core download
+
+# Test mag
+# nextflow run main.nf --outdir results_test -profile test,singularity
+
+# Test mag on a single Rothman HTP sample SRR14530767 using the SLURM executor and Singularity
+# nextflow run main.nf -profile engaging,rothman_test,singularity -resume
+
+# Run mag on all Rothman HTP samples using the SLURM executor and Singularity
+nextflow run main.nf -profile engaging,rothman_htp,singularity -resume
