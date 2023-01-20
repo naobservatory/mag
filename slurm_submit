@@ -35,10 +35,10 @@ NXF_SINGULARITY_CACHEDIR=/home/${USER}/.singularity
 # nf-core download
 
 # Test mag
-# nextflow run main.nf --outdir results_test -profile test,engaging,singularity -resume
+# nextflow run main.nf --outdir results_test -profile test,engaging -resume
 
-# Run mag on all Rothman HTP samples using the SLURM executor and Singularity
-# nextflow run main.nf -c conf/rothman_htp.config -profile engaging,singularity -resume
+# Run mag on all Rothman HTP samples
+# nextflow run main.nf -c conf/rothman_htp.config -profile engaging -resume
 
-# Run mag on the initial Illumina samples using the SLURM executor and Singularity
-nextflow run main.nf -c conf/illumina.config -profile engaging,singularity -resume
+# Run mag on the initial Illumina samples
+nextflow run main.nf -c conf/illumina.config -profile engaging -resume
