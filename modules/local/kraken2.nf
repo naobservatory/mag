@@ -12,10 +12,12 @@ process KRAKEN2 {
 
     output:
     tuple val("kraken2"), val(meta), path("results.krona"), emit: results_for_krona
+    path "${meta.id}_uncassified*.fq.gz"                  , emit: fastqs
     path  "kraken2_report.txt"                            , emit: report
     path "versions.yml"                                   , emit: versions
 
     script:
+    def args = task.ext.args ?: ''
     def input = meta.single_end ? "\"${reads}\"" :  "--paired \"${reads[0]}\" \"${reads[1]}\""
     """
     kraken2 \
@@ -23,9 +25,11 @@ process KRAKEN2 {
         --threads ${task.cpus} \
         --db database \
         --report kraken2_report.txt \
-        $input \
+        --unclassified-out ${meta.id}_uncassified#.fq \
+        $args $input \
         > kraken2.kraken
     cat kraken2.kraken | cut -f 2,3 > results.krona
+    gzip ${meta.id}_uncassified*.fq
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
