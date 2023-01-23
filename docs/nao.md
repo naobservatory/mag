@@ -26,7 +26,7 @@ Specifying input parameters and running the pipeline is described in the [usage 
 
 Therefore to run the pipeline, specify these two input files:
 1. **Configuration (`-c`)** - containing the input parameters for the pipeline (see [`illumina.config`](../conf/illumina.config) for an example)
-2. **Samplesheet (`--input`)** - containing paths to the input FASTQ files for each sample (see [`exp4.006_samplesheet.csv`](../data/exp4.006_samplesheet.csv) for an example). Either local paths or remote URLs/S3 paths can be used. In the case of remote files, the files will be downloaded to the local work directory (using the defined AWS credenials if required) before being processed by the pipeline.
+2. **Samplesheet (`--input`)** - containing paths to the input FASTQ files for each sample (see [`exp4.006_samplesheet.csv`](../data/exp4.006_samplesheet.csv) for an example). Either local paths or remote URLs/S3 paths can be used. In the case of remote files, the files will be downloaded to the local work directory (using the defined AWS credentials if required) before being processed by the pipeline.
 
 _Sidenote: Input parameters with a single dash (`-`) are Nextflow input parameters, whereas parameters with a double dash (`--`) are pipeline input parameters._
 
@@ -37,7 +37,7 @@ The pipeline has not yet been tested on AWS, but it should be possible to run it
 
 ## Debugging the pipeline
 
-For some useful tips on debugging nf-core pipelines see the [nf-core troubleshooting docs](https://nf-co.re/docs/usage/troubleshooting). One of the most useful tips is to go to the `work` directory and look at the `.command.{out,err,log,run,sh}` files for each failed process. These files contain the output and comamnd to replicate any errors, they can be used to quickly/iteratively replicate and fix the error.
+For some useful tips on debugging nf-core pipelines see the [nf-core troubleshooting docs](https://nf-co.re/docs/usage/troubleshooting). One of the most useful tips is to go to the `work` directory and look at the `.command.{out,err,log,run,sh}` files for each failed process. These files contain the output and command to replicate any errors, they can be used to quickly/iteratively replicate and fix the error.
 
 For debugging, it is recommended to use the [`-resume`](https://www.nextflow.io/docs/latest/tracing.html#resuming-a-failed-workflow) parameter described above (personally, I use this parameter for all runs).
 
@@ -55,12 +55,12 @@ For debugging, it is recommended to use the [`-resume`](https://www.nextflow.io/
 Nextflow pipelines consist of two main file types:
 1. `.nf` files that contain the pipeline code
     - [`main.nf`](../main.nf) is the main pipeline file that is executed when the pipeline is run, it can be thought of as a wrapper script/entry point
-    - [`mag.nf`](../workflows/mag.nf) contains the main workflow and logic for the pipeline, including loading the processes, specifying the order in which they are executed and channels, to load the input data and pass it between processes
+    - [`mag.nf`](../workflows/mag.nf) contains the main workflow and logic for the pipeline, including loading the processes, specifying the order in which they are executed, and channels, to load the input data and pass it between processes
     - [`modules/**.nf`](../modules) contains the individual modules that are used in the pipeline
 2. `.config` files that contain the pipeline configuration
     - [`nextflow.config`](../nextflow.config) contains the default pipeline configuration for all parameters and profiles
     - [`conf/**.config`](../conf) contains additional pipeline configuration
-        - [`base.config`](../conf/base.config) contains the pipeline resources and error strategy configuration each process as part of the base profile (enabled by default)
+        - [`base.config`](../conf/base.config) contains the configuration for the base profile (enabled by default), that specifies the resources and error strategy for each process
         - [`modules.config`](../conf/modules.config) contains the pipeline configuration for the modules including extra arguments for the tools and specifies what output files that get copied to the results directory
         - [`engaging.config`](../conf/engaging.config) contains the pipeline configuration for the Engaging cluster
         - [`illumina.config`](../conf/illumina.config) contains the pipeline configuration for Illumina data
