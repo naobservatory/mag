@@ -68,7 +68,7 @@ Nextflow pipelines consist of two main file types:
 
 ### What changes have already been made?
 
-To view the differences between the original nf-core/mag pipeline and the NAO version, you can [compare the two GitHub repos](https://github.com/nf-core/mag/compare/master...naobservatory:mag:main)
+To view the differences between the original nf-core/mag pipeline and the NAO version, you can [compare the two GitHub repos](https://github.com/nf-core/mag/compare/dev...naobservatory:mag:main)
 
 The main changes are also described in the [CHANGELOG](../CHANGELOG.md).
 
