@@ -63,6 +63,7 @@ include { BOWTIE2_REMOVAL_BUILD as BOWTIE2_HOST_REMOVAL_BUILD } from '../modules
 include { BOWTIE2_REMOVAL_ALIGN as BOWTIE2_HOST_REMOVAL_ALIGN } from '../modules/local/bowtie2_removal_align'
 include { BOWTIE2_REMOVAL_BUILD as BOWTIE2_PHIX_REMOVAL_BUILD } from '../modules/local/bowtie2_removal_build'
 include { BOWTIE2_REMOVAL_ALIGN as BOWTIE2_PHIX_REMOVAL_ALIGN } from '../modules/local/bowtie2_removal_align'
+include { RIBODETECTOR                                        } from '../modules/local/ribodetector'
 include { PORECHOP                                            } from '../modules/local/porechop'
 include { NANOLYSE                                            } from '../modules/local/nanolyse'
 include { FILTLONG                                            } from '../modules/local/filtlong'
@@ -257,6 +258,14 @@ workflow MAG {
 
         ch_versions = ch_versions.mix(ADAPTERREMOVAL_PE.out.versions.first(), ADAPTERREMOVAL_SE.out.versions.first())
 
+    }
+
+    if (params.remove_rrna){
+        RIBODETECTOR (
+            ch_short_reads
+        )
+        ch_short_reads = RIBODETECTOR.out.nonrrna_reads
+        ch_versions = ch_versions.mix(RIBODETECTOR.out.versions.first())
     }
 
     if (params.host_fasta){
