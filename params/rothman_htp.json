@@ -1,0 +1,18 @@
+{
+    "config_profile_name"                 : "Rothman et al. dataset from the HTP site https://doi.org/10.1128/AEM.01448-21",
+    "config_profile_description"          : "Analyse unenriched samples from the Rothman dataset from the HTP site",
+    "input"                               : "data/rothman_htp_samplesheet.csv",
+    "outdir"                              : "results_rothman_htp",
+    "clip_tool"                           : "adapterremoval",
+    "adapterremoval_adapter1"             : "CTGTCTCTTATACACATCTCCGAGCCCACGAGACNNNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG",
+    "adapterremoval_adapter2"             : "CTGTCTCTTATACACATCTGACGCTGCCGACGANNNNNNNNNNGTGTAGATCTCGGTGGTCGCCGTATCATT",
+    "adapterremoval_trim_quality_stretch" : true,
+    "coassemble_group"                    : true,
+    "spades_options"                      : "-k 77 --only-assembler",
+    "skip_spades"                         : true,
+    "skip_megahit"                        : false,
+    "virus_classification"                : true,
+    "kraken2_db"                          : "https://genome-idx.s3.amazonaws.com/kraken/k2_standard_20221209.tar.gz",
+    "cat_db"                              : "https://tbb.bio.uu.nl/bastiaan/CAT_prepare/CAT_prepare_20210107.tar.gz",
+    "gtdb"                                : false
+}

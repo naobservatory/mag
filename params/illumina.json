@@ -1,0 +1,22 @@
+{
+    "config_profile_name"                 : "Configuration for NAO initial Illumina samples",
+    "config_profile_description"          : "Analyse the initial NAO Illumina samples e.g. from exp4.006 (221014Esv_D22)",
+    "input"                               : "data/exp4.006_samplesheet.csv",
+    "outdir"                              : "results_illumina",
+    "clip_tool"                           : "adapterremoval",
+    "adapterremoval_adapter1"             : "CTGTCTCTTATACACATCTCCGAGCCCACGAGACNNNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG",
+    "adapterremoval_adapter2"             : "CTGTCTCTTATACACATCTGACGCTGCCGACGANNNNNNNNNNGTGTAGATCTCGGTGGTCGCCGTATCATT",
+    "adapterremoval_trim_quality_stretch" : true,
+    "kraken2_db"                          : "ftp://ftp.ccb.jhu.edu/pub/data/kraken2_dbs/minikraken_8GB_202003.tgz",
+    "skip_megahit"                        : true,
+    "skip_spades"                         : true,
+    "gtdb"                                : false,
+    "skip_binning"                        : true,
+    "skip_prokka"                         : true,
+    "skip_spadeshybrid"                   : true,
+    "skip_quast"                          : true,
+    "skip_prodigal"                       : true,
+    "skip_metabat2"                       : true,
+    "skip_maxbin2"                        : true,
+    "skip_busco"                          : true
+}
