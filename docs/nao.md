@@ -18,7 +18,7 @@ If you look into the SLURM submission script (see [here](../slurm_submit#L44)), 
 nextflow run main.nf -params-file params/illumina.json -profile engaging -resume
 ```
 
-Here, the `-params-file` parameter is used to specify the file containing all of the (non-default) input parameters. The `-profile` parameter is used to specify the pipeline profile to use. In this case, the `engaging` profile is used to specify that the pipeline should be run on the Engaging cluster which will run the pipeline using Singularity and the SLURM executor to submit jobs to the cluster. The `-resume` parameter is used to resume a failed run from the point where it failed. This can be useful if you want to change the pipeline parameters and re-run the pipeline from the point where it failed.
+Here, the `-params-file` parameter is used to specify the file containing all of the (non-default) input parameters. The `-profile` parameter is used to specify the pipeline profile to use. In this case, the [`engaging` profile](https://github.com/nf-core/configs/blob/master/conf/engaging.config) is used to specify that the pipeline should be run on the Engaging cluster which will run the pipeline using Singularity and the SLURM executor to submit jobs to the cluster. The `-resume` parameter is used to resume a failed run from the point where it failed. This can be useful if you want to change the pipeline parameters and re-run the pipeline from the point where it failed.
 
 ### Specifying input parameters
 
@@ -64,7 +64,6 @@ Nextflow pipelines consist of two main file types:
     - [`conf/**.config`](../conf) contains additional pipeline configuration
         - [`base.config`](../conf/base.config) contains the configuration for the base profile (enabled by default), that specifies the resources and error strategy for each process
         - [`modules.config`](../conf/modules.config) contains the pipeline configuration for the modules including extra arguments for the tools and specifies what output files that get copied to the results directory
-        - [`engaging.config`](../conf/engaging.config) contains the pipeline configuration for the Engaging cluster
 
 ### What changes have already been made?
 
