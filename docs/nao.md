@@ -45,8 +45,8 @@ For debugging, it is recommended to use the [`-resume`](https://www.nextflow.io/
 
 For all major runs, the input parameters and samplesheets can be found within the [`params`](../params/) and [`data`](../data/) directories respectively. These currently include the following runs:
 
-| Experiment | Description | Samplesheet | Configuration | AWS S3 Results |
-|------------|-------------|-------------|---------------|----------------|
+| Experiment | Description | Samplesheet | Parameters | AWS S3 Results |
+|------------|-------------|-------------|------------|----------------|
 | exp4.006 | Initial NAO generated llumina data | [`exp4.006_samplesheet.csv`](../data/exp4.006_samplesheet.csv) | [`illumina.json`](../params/illumina.json) | [`s3://nao-illumina-private/exp4.006/mag_results`](https://s3.console.aws.amazon.com/s3/buckets/nao-illumina-private?region=us-east-1&prefix=exp4.006/mag_results/&showversions=false) |
 | Rothman HTP | Public wastewater dataset from Rothman et al. for unenriched samples from the HTP site | [`rothman_htp_samplesheet.csv`](../data/rothman_htp_samplesheet.csv) | [`rothman_htp.json`](../params/rothman_htp.json) | [`s3://nao-phil-public/mag/results_rothman_htp`](https://s3.console.aws.amazon.com/s3/buckets/nao-phil-public?region=us-east-1&prefix=mag/results_rothman_htp/&showversions=false) |
 
