@@ -3,6 +3,25 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## naobservatory/mag:main
+
+### `Added`
+
+- [#364](https://github.com/nf-core/mag/pull/364) geNomad module for viral classification of assemblies
+- [a07927a](https://github.com/nf-core/mag/commit/a07927af7cd956a0b032de164b8bd0974eeb3534) - Rothman HTP and Illumina parameter and samplesheet files
+- [f253e9e](https://github.com/nf-core/mag/commit/f253e9e7900b3d24e0ea04691ae12359c5e214e1) - SLURM submission script for the Engaging cluster
+- [1e75f1e](https://github.com/nf-core/mag/commit/1e75f1e20500bc7403f1e3fc894f413b4f1e36de) - NAO-specific documentation
+- [bd24387](https://github.com/nf-core/mag/commit/bd24387b820d1c064a4f9ac2d5d9d68d34138163) - Kraken2 output unclassified reads
+- [14cdd8e](https://github.com/nf-core/mag/commit/14cdd8e5d7dad0b6610fdd0194cc2ffcb648fbfc) - BAM output mapping reads to contigs
+
+### `Changed`
+
+### `Fixed`
+
+- [8cad6cd](https://github.com/nf-core/mag/commit/8cad6cd9e1ea3413dc283a110a35d688112257cd) - Prevent an error if there are not enough mags to plot depths
+- [69fbf36](https://github.com/nf-core/mag/commit/69fbf36028c47a6e0014ce23a9b393757c06ab0b) - Added executable permissions to `plot_mag_depths.py` script
+- [1249b04](https://github.com/nf-core/mag/commit/1249b0462f6affb3e0e7fc17563c4a61cc291837) - Fixed AdapterRemoval2 `trimqualities` parameter
+
 ## dev
 
 ### `Added`
