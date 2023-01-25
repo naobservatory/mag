@@ -38,7 +38,7 @@ NXF_SINGULARITY_CACHEDIR=/home/${USER}/.singularity
 # nextflow run main.nf --outdir results_test -profile test,engaging -resume
 
 # Run mag on all Rothman HTP samples
-# nextflow run main.nf -c conf/rothman_htp.config -profile engaging -resume
+# nextflow run main.nf -params-file params/rothman_htp.json -profile engaging -resume
 
 # Run mag on the initial Illumina samples
-nextflow run main.nf -c conf/illumina.config -profile engaging -resume
+# nextflow run main.nf -params-file params/illumina.json -profile engaging -resume

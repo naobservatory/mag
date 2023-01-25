@@ -15,17 +15,17 @@ sbatch slurm_submit
 If you look into the SLURM submission script (see [here](../slurm_submit#L44)), you will see that it is running the pipeline using something like the following command:
 
 ```bash
-nextflow run main.nf -c illumina.config -profile engaging -resume
+nextflow run main.nf -params-file params/illumina.json -profile engaging -resume
 ```
 
-Here, the `-c` parameter is used to specify the configuration file containing all of the (non-default) input parameters. The `-profile` parameter is used to specify the pipeline profile to use. In this case, the `engaging` profile is used to specify that the pipeline should be run on the Engaging cluster which will run the pipeline using Singularity and the SLURM executor to submit jobs to the cluster. The `-resume` parameter is used to resume a failed run from the point where it failed. This can be useful if you want to change the pipeline parameters and re-run the pipeline from the point where it failed.
+Here, the `-params-file` parameter is used to specify the file containing all of the (non-default) input parameters. The `-profile` parameter is used to specify the pipeline profile to use. In this case, the `engaging` profile is used to specify that the pipeline should be run on the Engaging cluster which will run the pipeline using Singularity and the SLURM executor to submit jobs to the cluster. The `-resume` parameter is used to resume a failed run from the point where it failed. This can be useful if you want to change the pipeline parameters and re-run the pipeline from the point where it failed.
 
 ### Specifying input parameters
 
-Specifying input parameters and running the pipeline is described in the [usage docs](https://nf-co.re/mag/usage). In the example above, all input parameters can be specified in a configuration file, however, they can also be specified on the command line (which take precedence). Similarly, the input samples can be specified in a [samplesheet file]((https://nf-co.re/mag/usage#samplesheet-input-file)) or on the command line. I would generally recommend using input files for both the configuration and input files as well as storing them in this GitHub repo. This makes it easier to reproduce the results and to share the pipeline runs with others.
+Specifying input parameters and running the pipeline is described in the [usage docs](https://nf-co.re/mag/usage). In the example above, all input parameters can be specified in a parameters JSON file, however, there are many [other ways to specify input parameters](https://www.nextflow.io/docs/latest/config.html?highlight=params) including on the command line (which take precedence). Similarly, the input samples can be specified in a [samplesheet file]((https://nf-co.re/mag/usage#samplesheet-input-file)) or on the command line. I would generally recommend using input files for both the parameters and input files as well as storing them in this GitHub repo. This makes it easier to reproduce the results and to share the pipeline runs with others.
 
 Therefore to run the pipeline, specify these two input files:
-1. **Configuration (`-c`)** - containing the input parameters for the pipeline (see [`illumina.config`](../conf/illumina.config) for an example)
+1. **Parameters (`-params-file`)** - containing the input parameters for the pipeline (see [`illumina.json`](../params/illumina.json) for an example)
 2. **Samplesheet (`--input`)** - containing paths to the input FASTQ files for each sample (see [`exp4.006_samplesheet.csv`](../data/exp4.006_samplesheet.csv) for an example). Either local paths or remote URLs/S3 paths can be used. In the case of remote files, the files will be downloaded to the local work directory (using the defined AWS credentials if required) before being processed by the pipeline.
 
 _Sidenote: Input parameters with a single dash (`-`) are Nextflow input parameters, whereas parameters with a double dash (`--`) are pipeline input parameters._
@@ -43,10 +43,12 @@ For debugging, it is recommended to use the [`-resume`](https://www.nextflow.io/
 
 ## Examples runs
 
+For all major runs, the input parameters and samplesheets can be found within the [`params`](../params/) and [`data`](../data/) directories respectively. These currently include the following runs:
+
 | Experiment | Description | Samplesheet | Configuration | AWS S3 Results |
 |------------|-------------|-------------|---------------|----------------|
-| exp4.006 | Initial NAO generated llumina data | [`exp4.006_samplesheet.csv`](../data/exp4.006_samplesheet.csv) | [`illumina.config`](../conf/illumina.config) | [`s3://nao-illumina-private/exp4.006/mag_results`](https://s3.console.aws.amazon.com/s3/buckets/nao-illumina-private?region=us-east-1&prefix=exp4.006/mag_results/&showversions=false) |
-| Rothman HTP | Public wastewater dataset from Rothman et al. for unenriched samples from the HTP site | [`rothman_htp_samplesheet.csv`](../data/rothman_htp_samplesheet.csv) | [`rothman_htp.config`](../conf/rothman_htp.config) | [`s3://nao-phil-public/mag/results_rothman_htp`](https://s3.console.aws.amazon.com/s3/buckets/nao-phil-public?region=us-east-1&prefix=mag/results_rothman_htp/&showversions=false) |
+| exp4.006 | Initial NAO generated llumina data | [`exp4.006_samplesheet.csv`](../data/exp4.006_samplesheet.csv) | [`illumina.json`](../params/illumina.json) | [`s3://nao-illumina-private/exp4.006/mag_results`](https://s3.console.aws.amazon.com/s3/buckets/nao-illumina-private?region=us-east-1&prefix=exp4.006/mag_results/&showversions=false) |
+| Rothman HTP | Public wastewater dataset from Rothman et al. for unenriched samples from the HTP site | [`rothman_htp_samplesheet.csv`](../data/rothman_htp_samplesheet.csv) | [`rothman_htp.json`](../params/rothman_htp.json) | [`s3://nao-phil-public/mag/results_rothman_htp`](https://s3.console.aws.amazon.com/s3/buckets/nao-phil-public?region=us-east-1&prefix=mag/results_rothman_htp/&showversions=false) |
 
 ## Modifying the pipeline
 
@@ -63,8 +65,6 @@ Nextflow pipelines consist of two main file types:
         - [`base.config`](../conf/base.config) contains the configuration for the base profile (enabled by default), that specifies the resources and error strategy for each process
         - [`modules.config`](../conf/modules.config) contains the pipeline configuration for the modules including extra arguments for the tools and specifies what output files that get copied to the results directory
         - [`engaging.config`](../conf/engaging.config) contains the pipeline configuration for the Engaging cluster
-        - [`illumina.config`](../conf/illumina.config) contains the pipeline configuration for Illumina data
-        - [`rothman_htp.config`](../conf/rothman_htp.config) contains the pipeline configuration for the Rothman HTP dataset
 
 ### What changes have already been made?
 
